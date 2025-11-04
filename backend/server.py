@@ -43,6 +43,7 @@ cleanup_thread.start()
 @app.post("/preprocess")
 def preprocess():
     file = request.files.get('chatFile')
+    twofour=False
     if not file:
         return jsonify({"error": "No file named 'chatFile' in request"}), 400
     
@@ -58,12 +59,23 @@ def preprocess():
 
         messages=pattern.split(data)
         dates=re.findall(pattern,data)
-        cleaned_dates=[]
+
+        if(len(dates)==0):
+            pattern=re.compile(r"\d{1,2}\/\d{1,2}\/\d{1,2},\s\d{1,2}:\d{1,2}\s-")
+        
+            messages=pattern.split(data)
+            dates=re.findall(pattern,data)
+            twofour=True
+
+        extracted_dates=[]
         
         for date in dates:
             new_date=date.replace("\u202f"," ")
             new_date= new_date.rstrip("-").strip()
-            cleaned_dates.append(new_date)
+            extracted_dates.append(new_date)
+
+        cleaned_dates = [datetime.strptime(d, "%d/%m/%y, %H:%M").strftime("%d/%m/%y, %I:%M %p") for d in extracted_dates]
+        
         
         sep_msg=[]
         users=[]
@@ -247,7 +259,7 @@ def showAnalysis():
     fig,ax=plt.subplots()
     ax.bar(month_activity_df['month_name'],month_activity_df['msg'],color='green')
     ax.set_title("Month Activity Map")
-    plt.xticks(rotation='vertical')
+    plt .xticks(rotation='vertical')
 
     fig.tight_layout()
 
@@ -261,7 +273,6 @@ def showAnalysis():
 
     # pivot to matrix: rows=day, cols=period, values=msg
     pivot = df.pivot_table(index='day_name', columns='period', values='msg',aggfunc='count').fillna(0)
-    print(pivot)
 
     fig,ax=plt.subplots()
     im = ax.imshow(pivot.values, aspect='auto', cmap='YlGn')
