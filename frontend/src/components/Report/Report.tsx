@@ -182,7 +182,7 @@ const Report = () => {
                         analysisReport.month_png && analysisReport.daily_png &&
                         <>
                             <h3 className="text-4xl font-bold mb-[50px] mt-[70px]" style={{ color: primaryAccentColor }}>Timeline</h3>
-                            <div className="flex justify-between">
+                            <div className="flex justify-between gap-10 flex-wrap">
                                 <img src={analysisReport.month_png} width="500px" />
                                 <img src={analysisReport.daily_png} width="900px" />
                             </div>
@@ -193,7 +193,7 @@ const Report = () => {
                         analysisReport.week_act_png && analysisReport.month_act_png &&
                         <>
                             <h3 className="text-4xl font-bold mb-[50px] mt-[70px]" style={{ color: primaryAccentColor }}>Activity</h3>
-                            <div className="flex justify-between">
+                            <div className="flex justify-between flex-wrap gap-10">
                                 <img src={analysisReport.week_act_png} width="500px" />
                                 <img src={analysisReport.month_act_png} width="500px" />
                                 <img src={analysisReport.day_act_png} width="500px" />
