@@ -1,0 +1,5 @@
+frontend/.next
+frontend/node_modules
+frontend/next-env.d.ts
+backend/myenv
+backend/__pycache__
