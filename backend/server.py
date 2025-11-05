@@ -74,7 +74,10 @@ def preprocess():
             new_date= new_date.rstrip("-").strip()
             extracted_dates.append(new_date)
 
-        cleaned_dates = [datetime.strptime(d, "%d/%m/%y, %H:%M").strftime("%d/%m/%y, %I:%M %p") for d in extracted_dates]
+        if(twofour==True):
+            cleaned_dates = [datetime.strptime(d, "%d/%m/%y, %H:%M").strftime("%d/%m/%y, %I:%M %p") for d in extracted_dates]
+        else:
+            cleaned_dates=extracted_dates
         
         
         sep_msg=[]
