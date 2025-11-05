@@ -2,8 +2,8 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import axios, { AxiosError } from 'axios';
 
-const BackendUrl="http://127.0.0.1:5000"
-// const BackendUrl="https://whatsapp-chat-analyzer-f8dh.onrender.com"
+// const BackendUrl="http://127.0.0.1:5000"
+const BackendUrl="https://whatsapp-chat-analyzer-f8dh.onrender.com"
 
 const api = axios.create({
   baseURL: BackendUrl,
